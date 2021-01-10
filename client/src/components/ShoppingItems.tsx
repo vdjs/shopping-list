@@ -45,17 +45,20 @@ export class Items extends React.PureComponent<ShoppingItemsProps, ShoppingItems
 
   onItemCreate = async (event: React.ChangeEvent<HTMLButtonElement>) => {
     console.log("🚀 ~ file: ShoppingItems.tsx ~ line 47 ~ Items ~ onItemCreate= ~ event", event)
-    try {
-      const newItem = await createShoppingItem(this.props.auth.getIdToken(), {
-        name: this.state.newItemName
-      })
-      console.log("🚀 ~ file: ShoppingItems.tsx ~ line 52 ~ Items ~ newItem ~ newItem", newItem)
-      this.setState({
-        items: [...this.state.items, newItem],
-        newItemName: ''
-      })
-    } catch {
-      alert('New Item creation failed')
+    if(this.state.newItemName === "") alert("Name field can't be empty.")
+    else{
+      try {
+        const newItem = await createShoppingItem(this.props.auth.getIdToken(), {
+          name: this.state.newItemName
+        })
+        console.log("🚀 ~ file: ShoppingItems.tsx ~ line 52 ~ Items ~ newItem ~ newItem", newItem)
+        this.setState({
+          items: [...this.state.items, newItem],
+          newItemName: ''
+        })
+      } catch {
+        alert('New Item creation failed')
+      }
     }
   }
 

@@ -45,7 +45,6 @@ iamRoleStatements:
     Resource: !GetAtt KMSKey.Arn
 
 custom:
-
   documentation:
     api:
       info:
@@ -53,7 +52,7 @@ custom:
         title: Shopping List API
         description: Shopping List serverless application
     models:
-      - name: ShoppingItemRequest
+      - name: CreateShoppingItemRequest
         contentType: application/json
         schema: ${file(models/create-shopping-item-request.json)}
       - name: UpdateShoppingItemRequest
@@ -101,7 +100,7 @@ functions:
             summary: Create a new Shopping List Item
             description: Create a new Shopping List Item
             requestModels:
-              'application/json': ShoppingItemRequest
+              'application/json': CreateShoppingItemRequest
     
   UpdateShoppingItem:
     handler: src/lambda/http/updateShoppingItem.handler
